@@ -676,20 +676,21 @@ void			btSoftBody::setMass(int node,btScalar mass)
 }
 
 //
-btScalar		btSoftBody::getMass(int node) const
+btScalar btSoftBody::getMass(int node) const
 {
-	return(m_nodes[node].m_im>0?1/m_nodes[node].m_im:0);
+	return(m_nodes[node].m_im > 0.0f ? 1.0f / m_nodes[node].m_im : 0.0f);
 }
 
 //
-btScalar		btSoftBody::getTotalMass() const
+btScalar btSoftBody::getTotalMass() const
 {
-	btScalar	mass=0;
-	for(int i=0;i<m_nodes.size();++i)
+	btScalar mass = 0;
+	int nodes = m_nodes.size();
+	for(int i=0; i<nodes; ++i)
 	{
-		mass+=getMass(i);
+		mass += (m_nodes[i].m_im > 0.0f ? 1.0f / m_nodes[i].m_im : 0.0f);
 	}
-	return(mass);
+	return mass;
 }
 
 //
