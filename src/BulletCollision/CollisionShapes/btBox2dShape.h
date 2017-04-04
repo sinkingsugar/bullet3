@@ -130,7 +130,14 @@ public:
 		btConvexInternalShape::setLocalScaling(scaling);
 
 		m_implicitShapeDimensions = (unScaledImplicitShapeDimensionsWithMargin * m_localScaling) - oldMargin;
-
+		
+		//We also need to rewrite the vertices with the scaling value
+		btScalar x = scaling.getX() * 0.5f;
+		btScalar y = scaling.getY() * 0.5f;
+		m_vertices[0].setValue(-x, -y, 0);
+		m_vertices[1].setValue(x, -y, 0);
+		m_vertices[2].setValue(x, y, 0);
+		m_vertices[3].setValue(-x, y, 0);
 	}
 
 	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
